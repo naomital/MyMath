@@ -223,8 +223,8 @@ package myMath;
 				System.out.println("*******Test root************");
 				p1 = new Polynom("x^2+3x+1");
 				System.out.println("Estimated root: -2.618033  ,  Actual root:" + p1.root(-4, -1, eps));
-				p1 = new Polynom("x^2+3");
-				System.out.println("Estimated root: The function root must have one positive value and one negative value.  ,  actual root:" + p1.root(0.5, 1.5, eps));
+				p1 = new Polynom("-8x^3+9");
+				System.out.println("Estimated root: 1.04,Actual root:" + p1.root(-10, 9,0.000001));
 
 			}
 }

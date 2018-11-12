@@ -232,9 +232,9 @@ public class Polynom implements Polynom_able{
 		if(f(x0)>0&&f(x1)>0||f(x0)<0&&f(x1)<0)	{
 			throw new RuntimeException("The function root must have one positive value and one negative value.");
 		}
-		while((f(flg) >= eps)) {
+		while(Math.abs(f(flg)) < eps) {
 			if(f(flg)>0) {
-				if(Math.abs(f(x0))>0)x0=flg;
+				if(f(x0)>0)x0=flg;
 				else x1=flg;
 			}
 			flg=(x0+x1)/2;
