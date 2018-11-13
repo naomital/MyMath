@@ -104,7 +104,7 @@ public class Polynom implements Polynom_able{
 	/**
 	 * function add Combines two polynomials together
 	 * @param p1 the other Polynom_able that Combines together whit this polynom.
-	 * The function passes the second polynomial by iterator and sends it to the function add-of the kind of monom.
+	 * The function passes the second polynomial by iterator and sends it to the function add of the kind of monom.
 	 */
 	@Override
 	public void add(Polynom_able p1) {
@@ -229,13 +229,17 @@ public class Polynom implements Polynom_able{
 	@Override
 	public double root(double x0, double x1, double eps){
 		double flg=(x0+x1)/2;
-		if(f(x0)>0&&f(x1)>0||f(x0)<0&&f(x1)<0)	{
+		if(f(x0)*f(x1)>0)	{
 			throw new RuntimeException("The function root must have one positive value and one negative value.");
 		}
-		while(Math.abs(f(flg)) < eps) {
+		while(Math.abs(f(flg))>eps) {
 			if(f(flg)>0) {
 				if(f(x0)>0)x0=flg;
 				else x1=flg;
+			}
+			else {
+				if(f(x1)<0)x1=flg;
+				else x0=flg;
 			}
 			flg=(x0+x1)/2;
 		}
