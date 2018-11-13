@@ -1,5 +1,5 @@
 package myMath;
-
+//adi commit
 import java.util.Iterator;
 
 /**
