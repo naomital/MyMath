@@ -23,7 +23,7 @@ public class Polynom implements Polynom_able{
 	/**
 	 *  constructor that creates a zero polynomial
 	 */
-	
+
 	public Polynom() {
 		polynom = new ArrayList(0);
 	}
@@ -149,13 +149,13 @@ public class Polynom implements Polynom_able{
 	}
 
 
-/**
- * function that Subtracting from this polynomial another polynomial.
- * @param p2 the other Polynom_able.
- */
+	/**
+	 * function that Subtracting from this polynomial another polynomial.
+	 * @param p2 the other Polynom_able.
+	 */
 	@Override
 	public void substract(Polynom_able p2) {
-		
+
 		Iterator<Monom> it = p2.iteretor();
 		while(it.hasNext()) {
 			Monom current = it.next();
@@ -164,10 +164,10 @@ public class Polynom implements Polynom_able{
 		}
 		Collections.sort(this.polynom, new Monom_Comperator());
 	}
-/**
- * function that Multiplies this polynomial with another polynomial able.
- * @param p1 the other Polynom_able.
- */
+	/**
+	 * function that Multiplies this polynomial with another polynomial able.
+	 * @param p1 the other Polynom_able.
+	 */
 	@Override
 	public void multiply(Polynom_able p1) { 
 		Iterator<Monom> it = p1.iteretor();
@@ -186,13 +186,13 @@ public class Polynom implements Polynom_able{
 			Monom m1 = new Monom(current.get_coefficient(),current.get_power());
 			polynom.add(m1);
 		}
-		
+
 	}
-/**
- * function equal Checks whether this polynomial is equal to the next polynomial.
- * @param p1 are the other Polynom_able.
- * @return flg, Returns true if polynomials are equal and returns false if they are not equal
- */
+	/**
+	 * function equal Checks whether this polynomial is equal to the next polynomial.
+	 * @param p1 are the other Polynom_able.
+	 * @return flg, Returns true if polynomials are equal and returns false if they are not equal
+	 */
 	public boolean equals(Polynom_able p1) {
 		boolean flg=true;
 		Iterator<Monom> it = p1.iteretor();
@@ -245,10 +245,10 @@ public class Polynom implements Polynom_able{
 		}
 		return flg;
 	}
-/**
- * function copy Deeply copies this polynomial to the polynomial that we will insert into it.
- * @return the new  Polynom_able.
- */
+	/**
+	 * function copy Deeply copies this polynomial to the polynomial that we will insert into it.
+	 * @return the new  Polynom_able.
+	 */
 	@Override
 	public Polynom_able copy() {
 		Polynom_able newPol = new Polynom();
@@ -256,11 +256,11 @@ public class Polynom implements Polynom_able{
 		while(it.hasNext()) newPol.add(it.next());
 		return newPol;
 	}
-/**
-*the function derivative calculate the derivative of our polynom,
- * For example: (ax^b)'=a*bx^b-1.
- * @return the derivative of this polynom.
- */
+	/**
+	 *the function derivative calculate the derivative of our polynom,
+	 * For example: (ax^b)'=a*bx^b-1.
+	 * @return the derivative of this polynom.
+	 */
 	@Override
 	public Polynom_able derivative() {
 		Polynom_able DerivPol = new Polynom();
@@ -268,34 +268,39 @@ public class Polynom implements Polynom_able{
 		while(it.hasNext()) DerivPol.add(it.next().derivative());
 		return DerivPol;
 	}
-/**
- * function area Makes an integral of the polynomial according to the formula of Riemann integral.
- * see more about the Riemann integral in the link -https://en.wikipedia.org/wiki/Riemann_integral.
- * @param x0 the first x.
- * @param x1 the secen x.
- * @param eps the  length of the rectangle.
- * @return count, The amount of the integral
- */
+	/**
+	 * function area Makes an integral of the polynomial according to the formula of Riemann integral.
+	 * see more about the Riemann integral in the link -https://en.wikipedia.org/wiki/Riemann_integral.
+	 * @param x0 the first x.
+	 * @param x1 the secen x.
+	 * @param eps the  length of the rectangle.
+	 * @return count, The amount of the integral
+	 */
 	@Override
 	public double area(double x0, double x1, double eps) {
-		if(x0>x1) {
-			double flg=x0;
-			x0=x1;
-			x1=flg;
-		}
+//		if(x0>x1) {
+//			double flg=x0;
+//			x0=x1;
+//			x1=flg;
+//		}
 		double length=Math.abs(x1-x0);
 		double count=0;
 		while(length>0) {
-			if(f(x1)>0) count+=eps*f(x0);
+			if(f(x0)>0) {
+				count+=eps*f(x0);
+			}
+			else {
+				count+=eps*(Math.abs(f(x0)));
+			}
 			x0=x0+eps;
 			length=length-eps;
 		}
 		return count;
 	}
-/**
- * Iterator of monom. 
- * @return A variable of iterator. 
- */
+	/**
+	 * Iterator of monom. 
+	 * @return A variable of iterator. 
+	 */
 	@Override
 	public Iterator<Monom> iteretor() {
 		// TODO Auto-generated method stub
@@ -319,4 +324,10 @@ public class Polynom implements Polynom_able{
 			ans = ans.substring(1);
 		return ans;
 	}
+
+	
+
+
+
+
 }
