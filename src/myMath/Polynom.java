@@ -278,11 +278,9 @@ public class Polynom implements Polynom_able{
 	 */
 	@Override
 	public double area(double x0, double x1, double eps) {
-//		if(x0>x1) {
-//			double flg=x0;
-//			x0=x1;
-//			x1=flg;
-//		}
+		if(x0>x1) {
+			return 0;
+		}
 		double length=Math.abs(x1-x0);
 		double count=0;
 		while(length>0) {
@@ -325,7 +323,7 @@ public class Polynom implements Polynom_able{
 		return ans;
 	}
 
-	
+
 
 
 
