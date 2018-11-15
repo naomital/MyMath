@@ -16,18 +16,18 @@ public class Monom implements function{
 
 	private double _coefficient;
 	private int _power;
-/**
- * this function are constructor Which gets variables from form int and double.
- * @param a,is the number that the user gives to the coefficient.
- * @param b,is the number that the user gives to the power.
- */
+	/**
+	 * this function are constructor Which gets variables from form int and double.
+	 * @param a,is the number that the user gives to the coefficient.
+	 * @param b,is the number that the user gives to the power.
+	 */
 	public Monom(double a, int b){
 		this.set_coefficient(a);
 		this.set_power(b);
 	}
-/**
- * this function are the empty constructor, that Enters zero into the variables.
- */
+	/**
+	 * this function are the empty constructor, that Enters zero into the variables.
+	 */
 	public Monom(){
 		this.set_coefficient(0);
 		this.set_power(0);
@@ -49,33 +49,45 @@ public class Monom implements function{
 	 */
 
 	public Monom(String str) {
+
 		try {
-		if(str.equals("+") || str.equals("-")) {
-			this.set_coefficient(0);
-			this.set_power(1);
-		}
-		else {
 			str = str.toLowerCase();
 			if(str.contains("x")) {
 				int index = str.indexOf("x");
-				if(str.length() - 1 == index) { // only for X
+
+				if(str.length() - 1 == index) { // there is no power
+					this.set_power(1);
 					if(index == 1) {
 						if(str.charAt(0) == '-') this.set_coefficient(-1);
-						else this.set_coefficient(1);
-						this.set_power(1);		
+						else if(str.charAt(0) == '+') this.set_coefficient(1);
+						else { // for example: a*x
+							this.set_coefficient(Double.parseDouble(str.substring(0, index)));
+						}
+
+					}
+					else if(index == 0) {
+						this.set_coefficient(1);
 					}
 					else { // for example: a*x
 						this.set_coefficient(Double.parseDouble(str.substring(0, index)));
-						this.set_power(1);
 					}
 				}
-				else if(str.charAt(index+1) == '^'&&index == 1) { //for example: x^b
-					if(str.charAt(0) == '-') this.set_coefficient(-1);
-					else this.set_coefficient(1);
+				else if(str.charAt(index+1) == '^') { //for example: x^b
+					if(str.charAt(index+2)=='-') {
+						throw new Exception();
+					}
+					if(index == 1) {
+						if(str.charAt(0) == '-') this.set_coefficient(-1);
+						else if(str.charAt(0)=='+') this.set_coefficient(1);
+					}
+					else if(index == 0) this.set_coefficient(1);
+					else this.set_coefficient(Double.parseDouble(str.substring(0, index)));
 					this.set_power(Integer.parseInt(str.substring(index+2)));	
 				}
-
-				else {
+				else {//for example: ax^b
+					if(str.charAt(index+2)=='-') {
+						throw new Exception();
+					}
 					String[] s = str.split("x");
 					s[1] = s[1].substring(1);
 					this._coefficient = Double.parseDouble(s[0]);
@@ -86,7 +98,6 @@ public class Monom implements function{
 				this._coefficient = Double.parseDouble(str);
 				this._power = 0;
 			}
-		}
 		}
 		catch(Exception e) {
 			System.err.println("the input is not valid, please try again.");
@@ -132,31 +143,35 @@ public class Monom implements function{
 	public void set_power(int p) {
 		this._power = p;
 	}
-/**
- * function f Calculates Monos Y.
- *@param x  it gets a value-x inserted into X.
- * @return the calculation of the mono with the value given by the user.
- */
+	/**
+	 * function f Calculates Monos Y.
+	 *@param x  it gets a value-x inserted into X.
+	 * @return the calculation of the mono with the value given by the user.
+	 */
 	@Override
 	public double f(double x) {
 		x = _coefficient * Math.pow(x, _power);
 		// TODO Auto-generated method stub
 		return x;
 	} 
-/**
- * function add Makes a connection between two monomers.
- * @param other, the other monom That connect to our monom
- * @exception exception if the monom that trying to connect is not as power as this mono. 
- */
-	public void add(Monom other) {
-		if(this._power != other._power)
-			throw new IllegalArgumentException("Exponents must match in order to add");
-		this._coefficient += other._coefficient;
+	/**
+	 * function add Makes a connection between two monomers.
+	 * @param other, the other monom That connect to our monom
+	 * @exception exception if the monom that trying to connect is not as power as this mono. 
+	 */
+	public void add(Monom other){
+		try {
+			if(this._power == other._power){
+				this._coefficient += other._coefficient;}
+			else throw new Exception();
+		}catch(Exception e) {
+			System.err.println("Exponents must match in order to add");
+		}
 	}
-/**
- * function multiply Calculates multiplication between two monomers.
- * @param other the other monom that Multiplied with this mono.
- */
+	/**
+	 * function multiply Calculates multiplication between two monomers.
+	 * @param other the other monom that Multiplied with this mono.
+	 */
 	public void multiply(Monom other){
 		this._coefficient *= other._coefficient;
 		this._power += other._power;
@@ -167,6 +182,7 @@ public class Monom implements function{
 	@Override
 	public String toString() {
 		String ans = "";
+		if(this._coefficient == 0.0) return "0";
 		if(this._coefficient>0)ans="+";
 		if(_coefficient == 1 && _power>0) ans+="";
 		else if(_coefficient == -1 && _power>0) ans+="-";
