@@ -15,11 +15,16 @@ system description:
 2. cont_function 
 3. Polynom_able 
 # Class: 
-1.Monom_Comperator 
+
+1.Monom_Comperator
+
 2. Monom 
+
 3.Polynom 
 4. Test  
+
 5. main
+
 # Junit:
 1. MonomTest
 2. PolynomTest
