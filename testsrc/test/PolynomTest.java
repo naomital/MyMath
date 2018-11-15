@@ -11,12 +11,53 @@ import org.junit.jupiter.api.Test;
 
 import myMath.Polynom;
 import myMath.Polynom_able;
+<<<<<<< HEAD
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
+=======
+>>>>>>> b8fa76b19abbcb5c1504692cd20e961f46782b89
 
 class PolynomTest {
+	@Test
+	static void addTest() {
+		
+		Polynom p1 = new Polynom("6x");
+		Polynom p2 = new Polynom("x");
+		p1.add(p2);
+		Polynom Actual = new Polynom("7x");
+		if (p1.toString().equals(Actual.toString())) {
+			fail("error: addition isn't working!");
+		}
+		
+//		System.out.print("Expected: x^4-7x^3+2.2x-3.5  ,  ");
+//		System.out.print("Actual: ");
+//		System.out.println(p1);
+//		System.out.println();
+//
+//		//case +-:
+//		//#2
+//		p1 = new Polynom("2x^3 + -2.2X - 6");
+//		p2 = new Polynom("x^4 + -5X^3 + 3");
+//
+//		p1.add(p2);
+//		System.out.print("Expected: x^4-3x^3-2.2x-3  ,  ");
+//		System.out.print("Actual: ");
+//		System.out.println(p1);
+//		System.out.println();
+//
+//		//case of Zero Polynomial + regular Polynomial:
+//		//#3
+//		p1 = new Polynom("2x^3");
+//		p2 = new Polynom("0");
+//
+//		p1.add(p2);
+//		System.out.print("Expected: 2x^3 , ");
+//		System.out.print("Actual: ");
+//		System.out.println(p1);
+//		System.out.println();
+	}
 
 	static Polynom_able p1;
 	static Polynom_able p2;
