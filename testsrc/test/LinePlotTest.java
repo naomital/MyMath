@@ -10,6 +10,8 @@ import de.erichseifert.gral.plots.lines.DefaultLineRenderer2D;
 import de.erichseifert.gral.plots.lines.LineRenderer;
 import de.erichseifert.gral.plots.points.PointRenderer;
 import de.erichseifert.gral.ui.InteractivePanel;
+import myMath.Monom;
+import myMath.Polynom;
 
 public class LinePlotTest extends JFrame {
     public LinePlotTest() {
@@ -33,5 +35,6 @@ public class LinePlotTest extends JFrame {
     public static void main(String[] args) {
         LinePlotTest frame = new LinePlotTest();
         frame.setVisible(true);
+    	
     }
 }
